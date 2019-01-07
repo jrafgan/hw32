@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+
+    var Game = {
+        wordList: ['Bruce', 'Donald', 'Obama', 'Joe'],
+        randomWord: [],
+        hiddenWord: [],
+        mistakes: 0,
+        show: function() {
+            return 'randomWord: ' + this.randomWord + ' hiddenWord: ' + this.hiddenWord;
+        }
+    };
+
+    compareRandom = function() {
+            return Math.random() - 0.5;
+        }
+        Game.wordList.sort(compareRandom);
+
+    var rand = 0;
+    var randomWordStr = function() {
+        var q = Game.wordList[rand];
+        rand++;
+        return q;
+    };
+
+    var randomWord = function(word) {
+        Game.randomWord = word.split('');
+        return Game.randomWord;
+    };
+
+    var hiddenWord = function(word) {
+        for (var i = 0; i < word.length; i++) {
+            Game.hiddenWord.push('_');
+        }
+        return Game.hiddenWord;
+    };
+
+    var wrongTry = function() {
+        Game.mistakes += wrong;
+        return Game.mistakes;
+    };
+
+    var resetHiddenWord = function() {
+        Game.hiddenWord = [];
+        Game.randomWord = [];
+        return Game.hiddenWord;
+    }
+
+    var addLetter = function() {
+
+        var j = Game.randomWord.indexOf(userSymbolLow);
+        Game.hiddenWord[j] = userSymbolLow;
+
+        var m = Game.randomWord.lastIndexOf(userSymbolLow);
+        Game.hiddenWord[m] = userSymbolLow;
+        return j, m
+    };
+
+    var firstWord = randomWordStr();
+    randomWord(firstWord);
+    hiddenWord(firstWord);
+    console.log(Game.show());
+
+    while (true) {
+
+        var wrong = 0;
+        var userSymbol = prompt('Try to guess a Letter of american famous name:' + '\n' + Game.hiddenWord + '\n' + 'Please, enter a Letter' + '\nTotal Letters : ' + Game.hiddenWord.length);
+
+        if (userSymbol === null) {
+            break;
+
+        } else if (/^[A-Za-z]+$/.test(userSymbol)) {
+
+            var userSymbolLow = userSymbol.toLowerCase();
+
+            if (userSymbolLow === Game.randomWord[0].toLowerCase()) {
+                Game.hiddenWord[0] = userSymbol.toUpperCase();
+
+                if (Game.randomWord.indexOf(userSymbolLow) > -1) {
+                    addLetter();
+                }
+                alert('You\'ve got right!' + '\n' + Game.hiddenWord);
+                continue;
+
+            } else if (Game.randomWord.indexOf(userSymbolLow) > -1) {
+
+                addLetter();
+                alert('You\'ve got right!' + '\n' + Game.hiddenWord);
+
+                var empty = '_';
+                if (Game.hiddenWord.indexOf(empty) === -1) {
+                    confirm('Congratulations!!!\nYou WIN!' + '\nWord is : ' +
+                        Game.hiddenWord + '\nYour mistakes : ' + Game.mistakes);
+                    var newGame = confirm('Would you like to Continue?');
+                    if (newGame) {
+                        if (rand === Game.wordList.length) {
+                            alert('Thank you!\nAll words completed');
+                            break;
+                        }
+                        resetHiddenWord();
+                        var word = randomWordStr();
+                        randomWord(word);
+                        hiddenWord(word);
+                        console.log(Game.show());
+                        continue;
+                    } else {
+                        break;
+                    }
+                } else {
+                    continue;
+                }
+            } else {
+                wrong++;
+                wrongTry();
+                alert('You\'ve got Wrong!' + '\n' + 'Your mistakes : ' + Game.mistakes);
+                continue;
+            }
+        }
+        alert('You\'ve entered Illegal symbol');
+    }
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
