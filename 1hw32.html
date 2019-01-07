@@ -5,50 +5,51 @@
     <title>Document</title>
 </head>
 <body>
-    <script type="text/javascript">
+<script type="text/javascript">
 
-     var arr = ['scissors','rock','paper'];
-  var Game = {
-   countsComp: 0,
-   countsUser : 0,
-   getGameStart: function() {
-    while(true){
-     var rand = Math.floor(Math.random() * arr.length);
-     choiceComp = arr[rand];
-     var choiceUser = prompt('Please enter your choice :  paper or scissors or rock ');
-     if(choiceUser === null || choiceUser === ''){
-      alert('You are canceled');
-      break;
-     }else if(choiceComp === choiceUser) {
-      alert ('Nobody win.'+ 
-       '\nComputers choice is :' + ' '+ choiceComp +
-       '\nYour choice is :'+ ' '+ choiceUser +
-       '\nTotal :' +
-       '\n Computers counts :' + ' '+ this.countsComp +
-       '\n Your counts :'+ ' '+ this.countsUser);
+    var arr = ['scissors', 'rock', 'paper'];
+    var countsComp = 0;
+    var countsUser = 0;
+    var Game = {
 
-     }else if(choiceComp === arr[0] && choiceUser === 'rock' || choiceComp=== arr[0] && choiceUser === 'paper' || choiceComp === arr[1] && choiceUser === 'paper'){
-      this.countsComp++;
-      alert('Computer win'+
-       '\nComputers choice is :' + ' '+ choiceComp +
-       '\nYour choice is :'+ ' '+ choiceUser +
-       '\nTotal :' +
-       '\nComputers counts :'+ ' '+ this.countsComp +
-       '\nYour counts :'+' '+ this.countsUser);
-     } else { 
-      alert('You win'+
-       '\nComputers choice is :' + ' '+ choiceComp +
-       '\nYou choice is :'+ ' '+ choiceUser +
-       '\nTotal :' +
-       '\nComputers counts :'+ ' '+ this.countsComp +
-       '\nYour counts :'+ ' '+ this.countsUser);
-      this.countsUser++;
-     }
+        getGameStart: function () {
+            while (true) {
+                var rand = Math.floor(Math.random() * arr.length);
+                choiceComp = arr[rand];
+                var choiceUser = prompt('Please enter your choice :  paper or scissors or rock ');
+                if (choiceUser === null || choiceUser === '') {
+                    alert('You are canceled');
+                    break;
+                } else if (choiceComp === choiceUser) {
+                    alert('Nobody win.' +
+                        '\nComputers choice is :' + ' ' + choiceComp +
+                        '\nYour choice is :' + ' ' + choiceUser +
+                        '\nTotal :' +
+                        '\n Computers counts :' + ' ' + this.countsComp +
+                        '\n Your counts :' + ' ' + this.countsUser);
+
+                } else if (choiceComp === arr[0] && choiceUser === 'rock' || choiceComp === arr[0] && choiceUser === 'paper' || choiceComp === arr[1] && choiceUser === 'paper') {
+                    countsComp++;
+                    alert('Computer win' +
+                        '\nComputers choice is :' + ' ' + choiceComp +
+                        '\nYour choice is :' + ' ' + choiceUser +
+                        '\nTotal :' +
+                        '\nComputers counts :' + ' ' + countsComp +
+                        '\nYour counts :' + ' ' + countsUser);
+                } else {
+                    countsUser++;
+                    alert('You win' +
+                        '\nComputers choice is :' + ' ' + choiceComp +
+                        '\nYou choice is :' + ' ' + choiceUser +
+                        '\nTotal :' +
+                        '\nComputers counts :' + ' ' + countsComp +
+                        '\nYour counts :' + ' ' + countsUser);
+                }
+            };
+        }
     };
-   }
-  };
-  Game.getGameStart();
+    Game.getGameStart();
 
-    </script>
+</script>
 </body>
 </html>
